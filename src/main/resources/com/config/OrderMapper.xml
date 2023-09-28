@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="OrderMapper">
+
+   <!--  // num 값에 해당하는 CartDTO 얻기 -->
+    <select id="cartByNum" parameterType="int" resultType="CartDTO">
+      select num, userid, gCode, gName, gPrice,
+ 	                     gSize, gColor, gAmount, gImage
+ 	  from cart
+ 	  where num= #{num}
+    </select>
+  
+   <!-- // userid 값에 해당하는 MemberDTO 얻기 -->
+     <select id="memberByUserid" parameterType="string"
+ 	  resultType="MemberDTO">
+ 	   select userid, passwd, username, post, addr1,
+ 	          addr2, phone1, phone2, phone3, email1, email2
+ 	   from member
+ 	   where userid=#{userid} 
+ 	</select>
+ 	
+ 	<!--  결재 -->
+ 	<insert id="orderDone" parameterType="OrderDTO">
+ 	    insert into orderinfo ( num, userid, gCode, gName, gPrice, gSize,
+ 	                       gColor, gAmount, gImage, orderName,
+ 	                       post, addr1, addr2, phone, payMethod )
+ 	    values ( orderinfo_seq.nextval, #{userid},#{gCode},#{gName},#{gPrice},#{gSize},
+ 	                  #{gColor},#{gAmount},#{gImage},#{orderName},
+ 	                   #{post},#{addr1},#{addr2},#{phone},#{payMethod})                    
+ 	
+ 	</insert>
+ 	
+ 	<delete id="cartDel" parameterType="int">
+ 	  delete from cart
+ 	  where num = #{del_num}
+ 	</delete>
+</mapper>
+
+
+
