@@ -31,7 +31,7 @@ public class GoodsController {
 	@Autowired
 	CartService cartService;
 	
-	@GetMapping("/goodsRetrieve")  // /WEB-INF/views/goodsRetrieve.jsp
+	@GetMapping("/goodsRetrieve")  
 	@ModelAttribute("goodsRetrieve")
 	public GoodsDTO retrieve(@RequestParam("gCode") String gCode) {
 		GoodsDTO dto = service.goodsRetrieve(gCode);  // 모델
